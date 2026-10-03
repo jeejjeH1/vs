@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>نبرد رپ ChatGPT و Claude</title>
+<style>
+  @font-face { font-family: Lalezar; src: url(fonts/Lalezar-400.ttf); font-weight: 400; }
+  @font-face { font-family: Vazirmatn; src: url(fonts/Vazirmatn-400.ttf); font-weight: 400 500; }
+  @font-face { font-family: Vazirmatn; src: url(fonts/Vazirmatn-700.ttf); font-weight: 700; }
+  @font-face { font-family: Vazirmatn; src: url(fonts/Vazirmatn-900.ttf); font-weight: 900; }
+  html, body { margin: 0; background: #05060e; color: #f4efe4; font-family: Vazirmatn, Tahoma, sans-serif; }
+  canvas { display: block; width: 100%; max-width: 1920px; aspect-ratio: 16/9; margin: 0 auto; }
+  .ctl { display: flex; gap: 12px; align-items: center; max-width: 1920px; margin: 12px auto; padding: 0 16px; }
+  .ctl button { font: 700 16px Vazirmatn, Tahoma, sans-serif; padding: 8px 22px; border-radius: 20px; border: 0; background: #e0b75a; color: #0c0f22; cursor: pointer; }
+  .ctl input { flex: 1; direction: ltr; }
+  body.render .ctl { display: none; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1920" height="1080" dir="rtl"></canvas>
+<div class="ctl"><button id="play">پخش</button><input id="bar" type="range" min="0" max="1000" value="0"></div>
+<audio id="a" src="soundtrack.wav" preload="auto"></audio>
+<script>if (location.search.includes('render')) document.body.classList.add('render');</script>
+<script src="data.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
