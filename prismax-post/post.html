@@ -26,18 +26,10 @@
   .sub{margin-top:34px;max-width:620px;font-size:23px;line-height:1.5;color:#55504B}
   .sub b{color:var(--black);font-weight:600}
 
-  .stack{padding-top:58px;display:flex;flex-direction:column;gap:18px}
-  .sw{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:grid;grid-template-columns:150px 1fr}
-  .sw .c{position:relative}
-  .sw .t{padding:20px 26px;display:flex;flex-direction:column;justify-content:center}
-  .sw .n{font-size:24px;font-weight:500}
-  .sw .h{font-family:"JetBrains Mono",monospace;font-size:15px;letter-spacing:.14em;color:var(--muted);margin-top:6px}
-  .sw.dim{opacity:.62}
-  .sw.hero{grid-template-columns:1fr;border-color:var(--gold);box-shadow:0 24px 50px -24px rgba(185,152,106,.55)}
-  .sw.hero .c{height:230px;background:var(--black)}
-  .sw.hero .t{flex-direction:row;justify-content:space-between;align-items:center}
-  .tag{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.14em;color:var(--black);background:var(--gold);padding:8px 12px;border-radius:999px}
-  svg{position:absolute;inset:0;width:100%;height:100%}
+  .visual{position:relative;margin-top:40px;height:620px;border-radius:22px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(32,32,32,.6)}
+  .visual svg{position:absolute;inset:0;width:100%;height:100%}
+  .cap{position:absolute;left:28px;top:26px;font-family:"JetBrains Mono",monospace;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#C9C2B8}
+  .live{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold);margin-right:12px;vertical-align:middle;box-shadow:0 0 0 5px rgba(185,152,106,.2)}
 
   .foot{position:absolute;left:80px;right:80px;bottom:52px;display:flex;justify-content:space-between;align-items:flex-end}
   .q{font-family:"Instrument Serif",serif;font-size:38px;line-height:1.15;max-width:780px}
@@ -57,31 +49,52 @@
       <p class="sub">Robots need <b>real-world demonstrations</b> to learn new tasks and adapt to new environments. That demand needs infrastructure.</p>
     </div>
 
-    <div class="stack">
-      <div class="sw dim"><div class="c" style="background:var(--taupe)"></div><div class="t"><div class="n">Models</div><div class="h">#7A6A5A · SATURATING</div></div></div>
-      <div class="sw dim"><div class="c" style="background:var(--bronze)"></div><div class="t"><div class="n">Hardware</div><div class="h">#B56654 · SCALING</div></div></div>
-      <div class="sw hero">
-        <div class="c">
-          <svg viewBox="0 0 600 230" preserveAspectRatio="none">
-            <defs>
-              <pattern id="g" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#3a3a3a"/></pattern>
-            </defs>
-            <rect width="600" height="230" fill="url(#g)"/>
-            <!-- demonstration trajectories -->
-            <path d="M30 190 C 140 170, 180 60, 300 80 S 470 40, 570 30" fill="none" stroke="#B9986A" stroke-width="2.5"/>
-            <path d="M30 200 C 150 190, 200 100, 310 110 S 480 70, 570 60" fill="none" stroke="#B9986A" stroke-width="1.5" opacity=".55"/>
-            <path d="M30 175 C 130 150, 170 30, 290 55 S 460 20, 570 12" fill="none" stroke="#B9986A" stroke-width="1.5" opacity=".35"/>
-            <path d="M30 210 C 160 205, 230 140, 320 140 S 490 100, 570 95" fill="none" stroke="#B56654" stroke-width="1.5" opacity=".6" stroke-dasharray="4 6"/>
-            <g fill="#F4F1EC">
-              <circle cx="30" cy="190" r="5"/><circle cx="160" cy="140" r="4"/><circle cx="300" cy="80" r="4"/><circle cx="440" cy="52" r="4"/>
-            </g>
-            <circle cx="570" cy="30" r="9" fill="#B9986A"/><circle cx="570" cy="30" r="18" fill="none" stroke="#B9986A" opacity=".4"/>
-            <text x="30" y="30" fill="#8A8580" font-family="JetBrains Mono" font-size="12" letter-spacing="2">DEMO_0428 · PICK_AND_PLACE</text>
-            <text x="30" y="48" fill="#5a5550" font-family="JetBrains Mono" font-size="12" letter-spacing="2">EPISODES ▲ 12,480</text>
-          </svg>
-        </div>
-        <div class="t"><div><div class="n">Robotics Data</div><div class="h">#B9986A · THE NEW LAYER</div></div><span class="tag">↑ RISING</span></div>
-      </div>
+    <div class="visual">
+      <svg viewBox="0 0 600 620">
+        <defs>
+          <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1.1" fill="#3a3836"/></pattern>
+          <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#B9986A" stop-opacity=".35"/><stop offset="1" stop-color="#B9986A" stop-opacity="0"/></radialGradient>
+        </defs>
+        <rect width="600" height="620" fill="#202020"/>
+        <rect width="600" height="620" fill="url(#g)"/>
+        <circle cx="430" cy="250" r="170" fill="url(#glow)"/>
+
+        <!-- ghost poses: recorded demonstrations -->
+        <g fill="none" stroke="#7A6A5A" stroke-width="3" stroke-linecap="round" opacity=".55">
+          <path d="M200 520 L170 330 L330 210"/>
+          <path d="M200 520 L215 320 L380 245"/>
+        </g>
+        <g fill="#7A6A5A" opacity=".55"><circle cx="170" cy="330" r="8"/><circle cx="215" cy="320" r="8"/></g>
+
+        <!-- demonstration trajectory -->
+        <path d="M330 210 C 360 205, 395 220, 420 245 S 450 300, 445 335" fill="none" stroke="#B9986A" stroke-width="2.5" stroke-dasharray="2 9" stroke-linecap="round"/>
+        <g fill="#B9986A"><circle cx="330" cy="210" r="4"/><circle cx="380" cy="215" r="4"/><circle cx="420" cy="245" r="4"/></g>
+
+        <!-- table + object -->
+        <line x1="60" y1="520" x2="560" y2="520" stroke="#4a4744" stroke-width="2"/>
+        <rect x="415" y="440" width="64" height="64" rx="6" fill="#B56654"/>
+        <rect x="415" y="440" width="64" height="64" rx="6" fill="none" stroke="#F4F1EC" stroke-opacity=".25"/>
+
+        <!-- live robot arm -->
+        <rect x="150" y="505" width="100" height="18" rx="4" fill="#F4F1EC"/>
+        <g stroke="#F4F1EC" stroke-width="22" stroke-linecap="round" fill="none">
+          <path d="M200 505 L250 300"/>
+          <path d="M250 300 L445 345"/>
+        </g>
+        <circle cx="200" cy="505" r="20" fill="#202020" stroke="#F4F1EC" stroke-width="6"/>
+        <circle cx="250" cy="300" r="20" fill="#B9986A"/>
+        <circle cx="250" cy="300" r="7" fill="#202020"/>
+        <!-- wrist + gripper -->
+        <circle cx="445" cy="345" r="14" fill="#B9986A"/>
+        <path d="M447 360 L447 395" stroke="#F4F1EC" stroke-width="12" stroke-linecap="round"/>
+        <path d="M425 400 L470 400 M428 400 L428 432 M467 400 L467 432" stroke="#F4F1EC" stroke-width="8" stroke-linecap="round" fill="none"/>
+
+        <!-- sensor rays -->
+        <g stroke="#B9986A" stroke-width="1.2" opacity=".5">
+          <line x1="447" y1="436" x2="420" y2="440"/><line x1="447" y1="436" x2="475" y2="440"/>
+        </g>
+      </svg>
+      <div class="cap"><span class="live"></span>Real-world demonstrations → Robot learning</div>
     </div>
   </div>
 
