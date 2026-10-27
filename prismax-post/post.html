@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F4F1EC; --card:#FFFFFF; --line:#DDD7CE;
+    --black:#202020; --gold:#B9986A; --bronze:#B56654; --taupe:#7A6A5A; --muted:#8A8580;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1600px;height:900px;background:var(--cream);font-family:Inter,sans-serif;color:var(--black);overflow:hidden;position:relative}
+  /* subtle grid */
+  body::before{content:"";position:absolute;inset:0;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:80px 80px;opacity:.35}
+  .wrap{position:relative;display:grid;grid-template-columns:1fr 600px;gap:72px;padding:72px 80px 0}
+  .top{position:absolute;left:80px;right:80px;top:44px;display:flex;justify-content:space-between;align-items:center;
+    font-family:"JetBrains Mono",monospace;font-size:15px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+  .top .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--bronze);margin-right:12px;vertical-align:middle}
+  .left{padding-top:70px}
+  h1{font-family:"Instrument Serif",serif;font-weight:400;font-size:104px;line-height:.98;letter-spacing:-.02em}
+  h1 .strike{color:var(--muted);position:relative;font-size:.62em}
+  h1 .strike::after{content:"";position:absolute;left:-4px;right:-4px;top:54%;height:3px;background:var(--bronze)}
+  h1 em{font-style:italic;color:var(--gold)}
+  .sub{margin-top:34px;max-width:620px;font-size:23px;line-height:1.5;color:#55504B}
+  .sub b{color:var(--black);font-weight:600}
+
+  .stack{padding-top:58px;display:flex;flex-direction:column;gap:18px}
+  .sw{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:grid;grid-template-columns:150px 1fr}
+  .sw .c{position:relative}
+  .sw .t{padding:20px 26px;display:flex;flex-direction:column;justify-content:center}
+  .sw .n{font-size:24px;font-weight:500}
+  .sw .h{font-family:"JetBrains Mono",monospace;font-size:15px;letter-spacing:.14em;color:var(--muted);margin-top:6px}
+  .sw.dim{opacity:.62}
+  .sw.hero{grid-template-columns:1fr;border-color:var(--gold);box-shadow:0 24px 50px -24px rgba(185,152,106,.55)}
+  .sw.hero .c{height:230px;background:var(--black)}
+  .sw.hero .t{flex-direction:row;justify-content:space-between;align-items:center}
+  .tag{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.14em;color:var(--black);background:var(--gold);padding:8px 12px;border-radius:999px}
+  svg{position:absolute;inset:0;width:100%;height:100%}
+
+  .foot{position:absolute;left:80px;right:80px;bottom:52px;display:flex;justify-content:space-between;align-items:flex-end}
+  .q{font-family:"Instrument Serif",serif;font-size:38px;line-height:1.15;max-width:780px}
+  .q em{color:var(--bronze)}
+  .brand{display:flex;align-items:center;gap:18px}
+  .brand .wm{font-family:"Instrument Serif",serif;font-size:50px;letter-spacing:-.02em;line-height:1}
+  .brand .wm sup{font-size:22px;vertical-align:28px;margin-left:2px}
+  .brand .handle{font-family:"JetBrains Mono",monospace;font-size:15px;letter-spacing:.12em;color:var(--muted);border-left:1px solid var(--line);padding-left:18px}
+</style>
+</head>
+<body>
+  <div class="top"><span><span class="dot"></span>Physical AI · Field Notes</span><span>Robotics Data — Vol.01</span></div>
+
+  <div class="wrap">
+    <div class="left">
+      <h1>The next big<br>industry in AI<br>isn't <span class="strike">models</span> or <span class="strike">hardware</span>.<br>It's <em>robotics data.</em></h1>
+      <p class="sub">Robots need <b>real-world demonstrations</b> to learn new tasks and adapt to new environments. That demand needs infrastructure.</p>
+    </div>
+
+    <div class="stack">
+      <div class="sw dim"><div class="c" style="background:var(--taupe)"></div><div class="t"><div class="n">Models</div><div class="h">#7A6A5A · SATURATING</div></div></div>
+      <div class="sw dim"><div class="c" style="background:var(--bronze)"></div><div class="t"><div class="n">Hardware</div><div class="h">#B56654 · SCALING</div></div></div>
+      <div class="sw hero">
+        <div class="c">
+          <svg viewBox="0 0 600 230" preserveAspectRatio="none">
+            <defs>
+              <pattern id="g" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#3a3a3a"/></pattern>
+            </defs>
+            <rect width="600" height="230" fill="url(#g)"/>
+            <!-- demonstration trajectories -->
+            <path d="M30 190 C 140 170, 180 60, 300 80 S 470 40, 570 30" fill="none" stroke="#B9986A" stroke-width="2.5"/>
+            <path d="M30 200 C 150 190, 200 100, 310 110 S 480 70, 570 60" fill="none" stroke="#B9986A" stroke-width="1.5" opacity=".55"/>
+            <path d="M30 175 C 130 150, 170 30, 290 55 S 460 20, 570 12" fill="none" stroke="#B9986A" stroke-width="1.5" opacity=".35"/>
+            <path d="M30 210 C 160 205, 230 140, 320 140 S 490 100, 570 95" fill="none" stroke="#B56654" stroke-width="1.5" opacity=".6" stroke-dasharray="4 6"/>
+            <g fill="#F4F1EC">
+              <circle cx="30" cy="190" r="5"/><circle cx="160" cy="140" r="4"/><circle cx="300" cy="80" r="4"/><circle cx="440" cy="52" r="4"/>
+            </g>
+            <circle cx="570" cy="30" r="9" fill="#B9986A"/><circle cx="570" cy="30" r="18" fill="none" stroke="#B9986A" opacity=".4"/>
+            <text x="30" y="30" fill="#8A8580" font-family="JetBrains Mono" font-size="12" letter-spacing="2">DEMO_0428 · PICK_AND_PLACE</text>
+            <text x="30" y="48" fill="#5a5550" font-family="JetBrains Mono" font-size="12" letter-spacing="2">EPISODES ▲ 12,480</text>
+          </svg>
+        </div>
+        <div class="t"><div><div class="n">Robotics Data</div><div class="h">#B9986A · THE NEW LAYER</div></div><span class="tag">↑ RISING</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="q">Could robotics data become its own<br><em>billion-dollar industry?</em></div>
+    <div class="brand"><div class="wm">Prisma<sup>(x)</sup></div><div class="handle">@PRISMAXAI</div></div>
+  </div>
+</body>
+</html>
