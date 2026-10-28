@@ -1,0 +1,53 @@
+CREDITS — Seismic "What should remain private?"
+
+Logo and colour palette: supplied by the user (their brand material).
+Music: original score, synthesized in code for this film (audio.py). No samples.
+
+Fonts (SIL Open Font License 1.1):
+  Inter / Inter Display — Rasmus Andersson — https://rsms.me/inter/
+  JetBrains Mono — JetBrains — https://www.jetbrains.com/lp/mono/
+
+Code libraries:
+  three.js (MIT) — https://threejs.org
+  postprocessing (Zlib) — https://github.com/pmndrs/postprocessing
+
+Sound effects: Mixkit Sound Effects Free License (free for commercial use, no attribution required),
+taken from the video-shotcraft library (github.com/Vincentwei1021/video-shotcraft, assets/audio):
+  camera/zoom-futuristic.mp3 — https://assets.mixkit.co/active_storage/sfx/2626/2626-preview.mp3
+  data/data-compute.mp3 — https://assets.mixkit.co/active_storage/sfx/3122/3122-preview.mp3
+  data/data-scan.mp3 — https://assets.mixkit.co/active_storage/sfx/2847/2847-preview.mp3
+  data/glitch-electric-small.mp3 — https://assets.mixkit.co/active_storage/sfx/2595/2595-preview.mp3
+  data/glitch-static.mp3 — https://assets.mixkit.co/active_storage/sfx/1457/1457-preview.mp3
+  data/glitch-virtual-quick.mp3 — https://assets.mixkit.co/active_storage/sfx/2946/2946-preview.mp3
+  glass/glass-hit-cine.mp3 — https://assets.mixkit.co/active_storage/sfx/677/677-preview.mp3
+  impact/bass-hit-futuristic.mp3 — https://assets.mixkit.co/active_storage/sfx/2303/2303-preview.mp3
+  impact/bass-hit-short.mp3 — https://assets.mixkit.co/active_storage/sfx/2299/2299-preview.mp3
+  impact/impact-cine-big.mp3 — https://assets.mixkit.co/active_storage/sfx/788/788-preview.mp3
+  impact/impact-deep-whoosh.mp3 — https://assets.mixkit.co/active_storage/sfx/1143/1143-preview.mp3
+  impact/impact-epic-trailer.mp3 — https://assets.mixkit.co/active_storage/sfx/2908/2908-preview.mp3
+  impact/impact-movie-epic.mp3 — https://assets.mixkit.co/active_storage/sfx/2901/2901-preview.mp3
+  impact/impact-zoom-quick.mp3 — https://assets.mixkit.co/active_storage/sfx/772/772-preview.mp3
+  light/light-aura.mp3 — https://assets.mixkit.co/active_storage/sfx/2581/2581-preview.mp3
+  light/light-transition-magic.mp3 — https://assets.mixkit.co/active_storage/sfx/2583/2583-preview.mp3
+  light/shimmer-sparkle-sweep.mp3 — https://assets.mixkit.co/active_storage/sfx/2633/2633-preview.mp3
+  light/sparkle-touch.mp3 — https://assets.mixkit.co/active_storage/sfx/3083/3083-preview.mp3
+  mech/gear-lock-metallic.mp3 — https://assets.mixkit.co/active_storage/sfx/2858/2858-preview.mp3
+  mech/lock-digital.mp3 — https://assets.mixkit.co/active_storage/sfx/2859/2859-preview.mp3
+  mech/machine-activate-short.mp3 — https://assets.mixkit.co/active_storage/sfx/3180/3180-preview.mp3
+  mech/metal-drop-scifi-small.mp3 — https://assets.mixkit.co/active_storage/sfx/888/888-preview.mp3
+  scifi/space-intro-futuristic.mp3 — https://assets.mixkit.co/active_storage/sfx/2523/2523-preview.mp3
+  text/typewriter-digital.mp3 — https://assets.mixkit.co/active_storage/sfx/1363/1363-preview.mp3
+  transition/air-whoosh-powerful.mp3 — https://assets.mixkit.co/active_storage/sfx/3220/3220-preview.mp3
+  transition/air-woosh-deep.mp3 — https://assets.mixkit.co/active_storage/sfx/2604/2604-preview.mp3
+  transition/air-zoom-vacuum.mp3 — https://assets.mixkit.co/active_storage/sfx/2608/2608-preview.mp3
+  transition/sweep-metal-quick.mp3 — https://assets.mixkit.co/active_storage/sfx/2639/2639-preview.mp3
+  transition/sweep-scifi-fast.mp3 — https://assets.mixkit.co/active_storage/sfx/3114/3114-preview.mp3
+  transition/swoosh-quick.mp3 — https://assets.mixkit.co/active_storage/sfx/166/166-preview.mp3
+  transition/swoosh-slow.mp3 — https://assets.mixkit.co/active_storage/sfx/163/163-preview.mp3
+
+Method and shot vocabulary referenced (grammar, timings and easing only):
+  lemo-opuscar (DIRECTOR.md / TECHNIQUE.md, dark-keynote and glass-product styles) — github.com/lemomo-ai/lemo-opuscar
+  video-shotcraft shot cards: fracture, light-play-moves, slam-entrance-moves, white-flash-logo-simplify-cut,
+    blur-slide, title-demote-to-label, glitch-cycle, trailer-grammar-moves — github.com/Vincentwei1021/video-shotcraft
+  dioramas (volumetric light approach, engine notes) — github.com/blendi-remade/dioramas
+  motion-prompt (motion vocabulary) — github.com/showheyohtaki/motion-prompt
