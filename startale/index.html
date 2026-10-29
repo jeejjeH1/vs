@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Startale App — ipUSD × IP Vault</title>
+<style>
+  html, body { margin: 0; background: #05070a; color: #eef; font-family: Poppins, sans-serif; }
+  canvas { display: block; width: 100%; max-width: 1920px; aspect-ratio: 16/9; margin: 0 auto; }
+  .ctl { display: flex; gap: 12px; align-items: center; max-width: 1920px; margin: 12px auto; padding: 0 16px; }
+  .ctl button { font: 600 16px sans-serif; padding: 8px 22px; border-radius: 20px; border: 0; background: #7ff3b5; color: #0b0c0e; cursor: pointer; }
+  .ctl input { flex: 1; }
+  body.render .ctl { display: none; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<div class="ctl"><button id="play">Play</button><input id="bar" type="range" min="0" max="1000" value="0"></div>
+<audio id="a" src="soundtrack.wav" preload="auto"></audio>
+<script>if (location.search.includes('render')) document.body.classList.add('render');</script>
+<script src="timeline.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
