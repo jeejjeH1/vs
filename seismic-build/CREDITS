@@ -1,0 +1,39 @@
+CREDITS — "What can developers build on Seismic?"
+
+Logo and colour palette: supplied by the user (their brand material).
+Music: original score, synthesized in code for this film (audio.py). No samples.
+
+Fonts (SIL Open Font License 1.1):
+  Inter / Inter Display — Rasmus Andersson — https://rsms.me/inter/
+  JetBrains Mono — JetBrains — https://www.jetbrains.com/lp/mono/
+
+Code libraries: three.js (MIT) — https://threejs.org ; postprocessing (Zlib) — https://github.com/pmndrs/postprocessing
+
+Sound effects: Mixkit Sound Effects Free License (free for commercial use, no attribution required),
+from the video-shotcraft library (github.com/Vincentwei1021/video-shotcraft, assets/audio):
+  camera/zoom-air-fast.mp3 — https://assets.mixkit.co/active_storage/sfx/2625/2625-preview.mp3
+  glass/glass-debris-sweep.mp3 — https://assets.mixkit.co/active_storage/sfx/172/172-preview.mp3
+  glass/glass-hit-cine.mp3 — https://assets.mixkit.co/active_storage/sfx/677/677-preview.mp3
+  glass/glass-plate-slide.mp3 — https://assets.mixkit.co/active_storage/sfx/1527/1527-preview.mp3
+  impact/impact-deep-whoosh.mp3 — https://assets.mixkit.co/active_storage/sfx/1143/1143-preview.mp3
+  impact/impact-zoom-quick.mp3 — https://assets.mixkit.co/active_storage/sfx/772/772-preview.mp3
+  light/shimmer-sparkle-sweep.mp3 — https://assets.mixkit.co/active_storage/sfx/2633/2633-preview.mp3
+  light/sparkle-touch.mp3 — https://assets.mixkit.co/active_storage/sfx/3083/3083-preview.mp3
+  mech/gear-lock-metallic.mp3 — https://assets.mixkit.co/active_storage/sfx/2858/2858-preview.mp3
+  mech/lock-quick.mp3 — https://assets.mixkit.co/active_storage/sfx/2854/2854-preview.mp3
+  mech/metal-drop-scifi-small.mp3 — https://assets.mixkit.co/active_storage/sfx/888/888-preview.mp3
+  paper/paper-book-browse-fast.mp3 — https://assets.mixkit.co/active_storage/sfx/1102/1102-preview.mp3
+  paper/paper-slide.mp3 — https://assets.mixkit.co/active_storage/sfx/1530/1530-preview.mp3
+  text/typewriter-hit-soft.mp3 — https://assets.mixkit.co/active_storage/sfx/1366/1366-preview.mp3
+  transition/air-whoosh-powerful.mp3 — https://assets.mixkit.co/active_storage/sfx/3220/3220-preview.mp3
+  transition/air-woosh-quick.mp3 — https://assets.mixkit.co/active_storage/sfx/2605/2605-preview.mp3
+  transition/sweep-fast-small.mp3 — https://assets.mixkit.co/active_storage/sfx/166/166-preview.mp3
+  transition/sweep-metal-quick.mp3 — https://assets.mixkit.co/active_storage/sfx/2639/2639-preview.mp3
+  transition/sweep-short.mp3 — https://assets.mixkit.co/active_storage/sfx/175/175-preview.mp3
+  transition/swoosh-slow.mp3 — https://assets.mixkit.co/active_storage/sfx/163/163-preview.mp3
+
+Method and motion vocabulary referenced (grammar, timings and easing only):
+  lemo-opuscar (DIRECTOR.md / TECHNIQUE.md; white-model, swiss-motion, tilt-shift ideas) — github.com/lemomo-ai/lemo-opuscar
+  video-shotcraft shot cards (mask/word entrances, title-demote, light-play, impact rules) — github.com/Vincentwei1021/video-shotcraft
+  dioramas (turntable diorama staging, studio lighting notes) — github.com/blendi-remade/dioramas
+  motion-prompt (motion vocabulary) — github.com/showheyohtaki/motion-prompt

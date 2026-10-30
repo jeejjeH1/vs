@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Build on Seismic</title>
+<style>
+  @font-face { font-family: 'Inter Display'; src: url(fonts/InterDisplay-Light.otf); font-weight: 300; }
+  @font-face { font-family: 'Inter Display'; src: url(fonts/InterDisplay-Regular.otf); font-weight: 400; }
+  @font-face { font-family: 'Inter Display'; src: url(fonts/InterDisplay-Medium.otf); font-weight: 500; }
+  @font-face { font-family: 'Inter Display'; src: url(fonts/InterDisplay-SemiBold.otf); font-weight: 600; }
+  @font-face { font-family: 'Inter'; src: url(fonts/Inter-Regular.otf); font-weight: 400; }
+  @font-face { font-family: 'Inter'; src: url(fonts/Inter-Medium.otf); font-weight: 500; }
+  @font-face { font-family: 'JB Mono'; src: url(fonts/JetBrainsMono-Regular.ttf); font-weight: 400; }
+  @font-face { font-family: 'JB Mono'; src: url(fonts/JetBrainsMono-Medium.ttf); font-weight: 500; }
+  html, body { margin: 0; background: #0b0a0b; }
+  #out { display: block; width: 100%; max-width: 1920px; aspect-ratio: 16/9; margin: 0 auto; }
+  #gl { position: absolute; left: -99999px; top: 0; }
+  .ctl { display: flex; gap: 12px; align-items: center; max-width: 1920px; margin: 12px auto; padding: 0 16px; font: 500 15px Inter, sans-serif; color: #e8e8e8; }
+  .ctl button { font: inherit; padding: 8px 20px; border-radius: 4px; border: 0; background: #825A6D; color: #fff; cursor: pointer; }
+  .ctl input { flex: 1; }
+  body.render .ctl { display: none; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "./node_modules/three/build/three.module.js",
+  "three/addons/": "./node_modules/three/examples/jsm/",
+  "postprocessing": "./node_modules/postprocessing/build/index.js"
+} }
+</script>
+</head>
+<body>
+<canvas id="out" width="1920" height="1080"></canvas>
+<div class="ctl"><button id="play">Play</button><input id="bar" type="range" min="0" max="1000" value="0"><span id="tc">0.00</span></div>
+<script>if (location.search.includes('render')) document.body.classList.add('render');</script>
+<script src="timeline.js"></script>
+<script type="module" src="main.js"></script>
+</body>
+</html>
