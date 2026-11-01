@@ -1,7 +1,11 @@
 // Action Model — 15s 1080x1080 motion graphic. renderFrame(t) is pure: same t -> same frame.
 'use strict';
-const W = 1080, H = 1080;
+// ?wide -> 1920x1080 (16:9). The story is laid out in a centred 1080-wide column (S); the
+// background, people ring, flow lines and vignette stretch across the full width.
+const WIDE = /wide/.test(location.search);
+const W = WIDE ? 1920 : 1080, H = 1080, S = 1080, OX = (W - S) / 2;
 const cv = document.getElementById('c');
+cv.width = W; cv.height = H; cv.style.aspectRatio = `${W} / ${H}`; cv.style.maxWidth = `${W}px`;
 const ctx = cv.getContext('2d');
 
 const C = {
@@ -140,8 +144,9 @@ function ripple(x, y, t, tc, scale = 1) {
 }
 
 // ---------- headline: words rise in one by one; *words* get the violet gradient
-function headline(str, t, t0, t1, { size = 76, maxW = 960, cy = 172 } = {}) {
+function headline(str, t, t0, t1, { size = 76, maxW = WIDE ? 1600 : 960, cy = 172 } = {}) {
   if (t < t0 - 0.01 || t > t1 + 0.01) return;
+  if (WIDE) str = str.replace(/\|/g, ' '); // one line fits in 16:9
   ctx.save();
   ctx.font = `800 ${size}px ${F}`;
   const words = []; let hl = false;
@@ -164,7 +169,7 @@ function headline(str, t, t0, t1, { size = 76, maxW = 960, cy = 172 } = {}) {
   let k = 0;
   lines.forEach((line, li) => {
     const lw = line.reduce((s, wd) => s + wd.width, 0) + space * (line.length - 1);
-    let x = W / 2 - lw / 2;
+    let x = S / 2 - lw / 2;
     const y = cy - ((lines.length - 1) * lh) / 2 + li * lh;
     for (const wd of line) {
       const a = eo5(p(t, t0 + k * 0.06, t0 + k * 0.06 + 0.42));
@@ -194,7 +199,9 @@ function headline(str, t, t0, t1, { size = 76, maxW = 960, cy = 172 } = {}) {
 
 // ---------- precomputed scene data
 const BOKEH = Array.from({ length: 70 }, () => ({ x: R() * W, y: R() * H, r: 0.7 + R() * 2.4, s: 8 + R() * 26, ph: R() * 6.28, a: 0.15 + R() * 0.55 }));
-const ORBS = [
+const ORBS = WIDE ? [
+  { x: 1810, y: 985, r: 70, ph: 0 }, { x: 250, y: 330, r: 46, ph: 2 }, { x: 1620, y: 300, r: 26, ph: 4 }, { x: 330, y: 960, r: 30, ph: 1 }, { x: 110, y: 660, r: 18, ph: 3 }, { x: 1850, y: 520, r: 16, ph: 5 },
+] : [
   { x: 975, y: 900, r: 62, ph: 0 }, { x: 98, y: 345, r: 36, ph: 2 }, { x: 948, y: 352, r: 20, ph: 4 }, { x: 120, y: 990, r: 24, ph: 1 },
 ];
 const CORE = { x: 540, y: 628 };
@@ -203,7 +210,7 @@ const PEOPLE = [];
 for (let i = 0; i < TL.people; i++) {
   const ang = (-90 + i * (360 / TL.people) + (R() - 0.5) * 9) * Math.PI / 180;
   const rad = 300 + R() * 80;
-  const x = clamp(CORE.x + Math.cos(ang) * rad * 1.22, 70, 960);
+  const x = clamp(CORE.x + Math.cos(ang) * rad * (WIDE ? 2.05 : 1.22), 70 - OX * 0.92, 960 + OX * 0.92);
   const y = clamp(CORE.y + Math.sin(ang) * rad * 0.98, 320, 1005);
   const mid = [(x + CORE.x) / 2, (y + CORE.y) / 2];
   const dx = CORE.x - x, dy = CORE.y - y, L = Math.hypot(dx, dy);
@@ -220,7 +227,8 @@ const FINALE = Array.from({ length: 34 }, () => ({ a: R() * Math.PI * 2, v: 300 
 const CTIP = { x: 470, y: 505, k: 11.5 };
 const FLOW_STARTS = [[-60, 250], [-60, 820], [300, 1140], [1140, 990], [1140, 640], [1140, 300], [760, -60], [-60, 560]];
 const FLOW_TARGET = [0, 1, 2, 3, 4, 5, 6, 0];
-const FLOWS = FLOW_STARTS.map((S, j) => {
+const FLOWS = FLOW_STARTS.map(([sx, sy], j) => {
+  const S = [sx < 0 ? sx - OX : sx > 1080 ? sx + OX : sx, sy];
   const v = CUR[FLOW_TARGET[j]], V = [CTIP.x + v[0] * CTIP.k, CTIP.y + v[1] * CTIP.k];
   const dx = V[0] - S[0], dy = V[1] - S[1], L = Math.hypot(dx, dy), nx = -dy / L, ny = dx / L, sg = j % 2 ? 1 : -1;
   return { S, V, c1: [S[0] + dx * 0.33 + nx * 170 * sg, S[1] + dy * 0.33 + ny * 170 * sg], c2: [S[0] + dx * 0.7 - nx * 110 * sg, S[1] + dy * 0.7 - ny * 110 * sg], t0: TL.linesIn + j * 0.085 };
@@ -229,7 +237,7 @@ const FLOWS = FLOW_STARTS.map((S, j) => {
 // ---------- background: near-black violet, nebula glow, grid floor, flowing ribbons, bokeh
 function background(t) {
   ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H);
-  glow(540 + 70 * Math.sin(t * 0.35), 540 + 40 * Math.cos(t * 0.28), 720, C.v1, 0.22);
+  glow(W / 2 + 70 * Math.sin(t * 0.35), 540 + 40 * Math.cos(t * 0.28), 720, C.v1, 0.22);
   glow(900, 160, 520, '#5B21B6', 0.16);
   glow(150, 940, 520, C.v2, 0.10);
 
@@ -247,7 +255,7 @@ function background(t) {
   const vg = ctx.createLinearGradient(0, y0, 0, H);
   vg.addColorStop(0, 'rgba(168,85,247,0)'); vg.addColorStop(1, 'rgba(168,85,247,0.22)');
   ctx.strokeStyle = vg; ctx.lineWidth = 1.2;
-  for (let i = -16; i <= 16; i++) { ctx.beginPath(); ctx.moveTo(540 + i * 14, y0); ctx.lineTo(540 + i * 150, H); ctx.stroke(); }
+  for (let i = -18; i <= 18; i++) { ctx.beginPath(); ctx.moveTo(W / 2 + i * 14, y0); ctx.lineTo(W / 2 + i * 150, H); ctx.stroke(); }
   for (let n = 0; n < 14; n++) {
     const z = 1 + n - ((t * 0.9) % 1);
     const y = y0 + (H - y0) / z;
@@ -737,7 +745,7 @@ function finale(t) {
   ctx.save();
   ctx.font = `800 ${size}px ${F}`; const w1 = ctx.measureText('Action').width;
   ctx.font = `300 ${size}px ${F}`; const w2 = ctx.measureText('Model').width;
-  const x0 = W / 2 - (w1 + w2) / 2;
+  const x0 = S / 2 - (w1 + w2) / 2;
   const wq = eio(p(t, TL.wordmark, TL.wordmark + 0.6));
   if (wq > 0) {
     ctx.save();
@@ -764,10 +772,10 @@ function finale(t) {
     ctx.globalAlpha = ta;
     ctx.font = `700 60px ${F}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     const tw = ctx.measureText('Community-Owned AI').width, ty = 782 + (1 - ta) * 30;
-    const g = ctx.createLinearGradient(W / 2 - tw / 2, 0, W / 2 + tw / 2, 0);
+    const g = ctx.createLinearGradient(S / 2 - tw / 2, 0, S / 2 + tw / 2, 0);
     g.addColorStop(0, '#E9D5FF'); g.addColorStop(0.5, '#C084FC'); g.addColorStop(1, '#E9D5FF');
     ctx.shadowColor = rgba(C.v1, 0.8); ctx.shadowBlur = 24; ctx.fillStyle = g;
-    ctx.fillText('Community-Owned AI', W / 2, ty);
+    ctx.fillText('Community-Owned AI', S / 2, ty);
     ctx.restore();
   }
   // handle pill
@@ -775,7 +783,7 @@ function finale(t) {
   if (ha > 0) {
     ctx.save();
     ctx.globalAlpha = clamp(ha);
-    ctx.translate(W / 2, 882); ctx.scale(ha, ha);
+    ctx.translate(S / 2, 882); ctx.scale(ha, ha);
     ctx.font = `600 42px ${F}`;
     const hw = ctx.measureText('@ActionModelAI').width + 70;
     rrect(-hw / 2, -36, hw, 72, 36);
@@ -800,20 +808,26 @@ function renderFrame(t) {
   background(t);
   ctx.save();
   const s = cameraScale(t);
+  ctx.translate(OX, 0);
   ctx.translate(540, 600); ctx.scale(s, s); ctx.translate(-540, -600);
   sceneAct(t);
   sceneNetwork(t);
   ctx.restore();
   // cut flash (keeps the cuts snappy)
   for (const c of [3, 6, 9]) { const f = bump(t, c - 0.04, 0.04, 0.16); if (f > 0.01) { ctx.fillStyle = `rgba(168,85,247,${0.12 * f})`; ctx.fillRect(0, 0, W, H); } }
+  ctx.save(); ctx.translate(OX, 0);
   headline('AI that talks is *old news.*', t, 0.55, 2.9);
   headline('Action Model|learns to *ACT.*', t, 3.12, 5.88);
   headline('Trained by *real people.*', t, 6.2, 8.9);
   headline('Owned by the people|*who build it.*', t, 9.3, 11.85);
+  ctx.restore();
   // vignette
-  const v = ctx.createRadialGradient(540, 560, 380, 540, 560, 800);
+  ctx.save();
+  ctx.translate(W / 2, 560); ctx.scale(W / S, 1);
+  const v = ctx.createRadialGradient(0, 0, 380, 0, 0, 800);
   v.addColorStop(0, 'rgba(5,0,12,0)'); v.addColorStop(1, 'rgba(5,0,12,0.7)');
-  ctx.fillStyle = v; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = v; ctx.fillRect(-S / 2, -560, S, H);
+  ctx.restore();
   // fade in from black at the very start
   const fi = 1 - p(t, 0, 0.35);
   if (fi > 0) { ctx.fillStyle = `rgba(0,0,0,${fi})`; ctx.fillRect(0, 0, W, H); }

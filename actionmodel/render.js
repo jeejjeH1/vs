@@ -1,5 +1,5 @@
 // Usage:
-//   node render.js -> renders actionmodel_15s.mp4 (run `node audio.js` first)
+//   node render.js [--wide] -> renders actionmodel_15s.mp4 (or actionmodel_15s_16x9.mp4 with --wide; run `node audio.js` first)
 //   node render.js --stills 1.5,4.8 DIR -> writes PNG stills for review
 const http = require('http');
 const fs = require('fs');
@@ -9,6 +9,9 @@ let chromium;
 try { ({ chromium } = require('playwright')); } catch { ({ chromium } = require('/opt/node22/lib/node_modules/playwright')); }
 
 const ROOT = __dirname;
+const WIDE = process.argv.includes('--wide');
+const VW = WIDE ? 1920 : 1080;
+const argv = process.argv.filter((a) => a !== '--wide');
 const TL = require('./timeline.js');
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.png': 'image/png', '.jpg': 'image/jpeg', '.ttf': 'font/ttf', '.otf': 'font/otf', '.wav': 'audio/wav' };
 
@@ -26,23 +29,23 @@ function serve() {
 (async () => {
   const srv = await serve();
   const browser = await chromium.launch();
-  const page = await browser.newPage({ viewport: { width: 1080, height: 1080 } });
+  const page = await browser.newPage({ viewport: { width: VW, height: 1080 } });
   page.on('console', (m) => console.log('[page]', m.text()));
   page.on('pageerror', (e) => console.error('[page error]', e.message));
-  await page.goto(`http://127.0.0.1:${srv.address().port}/index.html?render=1`);
+  await page.goto(`http://127.0.0.1:${srv.address().port}/index.html?render=1${WIDE ? '&wide=1' : ''}`);
   await page.waitForFunction(() => window.READY === true, null, { timeout: 60000 });
 
-  const si = process.argv.indexOf('--stills');
+  const si = argv.indexOf('--stills');
   if (si > 0) {
-    const times = process.argv[si + 1].split(',').map(Number);
-    const dir = process.argv[si + 2] || ROOT;
+    const times = argv[si + 1].split(',').map(Number);
+    const dir = argv[si + 2] || ROOT;
     fs.mkdirSync(dir, { recursive: true });
     for (const t of times) {
       const b64 = await page.evaluate((t) => { renderFrame(t); return document.getElementById('c').toDataURL('image/jpeg', 0.9).slice(23); }, t);
       fs.writeFileSync(path.join(dir, `still_${t.toFixed(2)}.jpg`), Buffer.from(b64, 'base64'));
     }
   } else {
-    const outFile = path.resolve(ROOT, process.argv[2] || 'actionmodel_15s.mp4');
+    const outFile = path.resolve(ROOT, argv[2] || (WIDE ? 'actionmodel_15s_16x9.mp4' : 'actionmodel_15s.mp4'));
     const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error',
       '-f', 'image2pipe', '-framerate', String(TL.FPS), '-c:v', 'mjpeg', '-i', '-',
       '-i', path.join(ROOT, 'soundtrack.wav'),

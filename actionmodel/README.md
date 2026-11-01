@@ -2,7 +2,9 @@
 
 A 1080×1080 square video at 30 fps, 15 seconds long, with an original soft electronic score and sound effects timed to the visuals.
 
-**Final file:** `actionmodel_15s.mp4` (H.264 + AAC)
+**Final files** (H.264 + AAC):
+- `actionmodel_15s_16x9.mp4`: 1920×1080 (16:9). The story runs in a centred column. The background, people network and flow lines use the full width, and each headline fits on one line.
+- `actionmodel_15s.mp4`: 1080×1080 (square).
 
 | Time | Scene | On-screen text |
 |---|---|---|
@@ -22,8 +24,9 @@ A 1080×1080 square video at 30 fps, 15 seconds long, with an original soft elec
 ## Rebuild
 ```bash
 node audio.js    # -> soundtrack.wav
-node render.js   # -> actionmodel_15s.mp4
+node render.js          # -> actionmodel_15s.mp4 (1080×1080)
+node render.js --wide   # -> actionmodel_15s_16x9.mp4 (1920×1080)
 node render.js --stills 2.3,7.5,14.9 out/   # optional review stills
 ```
-For a live preview, serve this folder (for example with `npx serve .`) and open `index.html`.
+For a live preview, serve this folder (for example with `npx serve .`) and open `index.html` (add `?wide` for the 16:9 layout).
 Font: Inter (OFL).
