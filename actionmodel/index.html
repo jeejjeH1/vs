@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Action Model — Community-Owned AI</title>
+<style>
+  @font-face { font-family: Inter; src: url(fonts/Inter-Light.otf); font-weight: 300; }
+  @font-face { font-family: Inter; src: url(fonts/Inter-Regular.otf); font-weight: 400; }
+  @font-face { font-family: Inter; src: url(fonts/Inter-Medium.otf); font-weight: 500; }
+  @font-face { font-family: Inter; src: url(fonts/Inter-SemiBold.otf); font-weight: 600; }
+  @font-face { font-family: Inter; src: url(fonts/Inter-Bold.otf); font-weight: 700; }
+  @font-face { font-family: Inter; src: url(fonts/Inter-ExtraBold.otf); font-weight: 800; }
+  html, body { margin: 0; background: #0D0018; color: #f3e8ff; font-family: Inter, system-ui, sans-serif; }
+  canvas { display: block; width: 100%; max-width: 1080px; aspect-ratio: 1; margin: 0 auto; }
+  .ctl { display: flex; gap: 12px; align-items: center; max-width: 1080px; margin: 12px auto; padding: 0 16px; box-sizing: border-box; }
+  .ctl button { font: 600 15px Inter, system-ui, sans-serif; padding: 8px 20px; border-radius: 20px; border: 0; background: #7B2CFF; color: #fff; cursor: pointer; }
+  .ctl input { flex: 1; accent-color: #A855F7; }
+  body.render .ctl { display: none; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1080"></canvas>
+<div class="ctl"><button id="play">Play</button><input id="bar" type="range" min="0" max="1000" value="0"></div>
+<audio id="a" src="soundtrack.wav" preload="auto"></audio>
+<script>if (location.search.includes('render')) document.body.classList.add('render');</script>
+<script src="timeline.js"></script>
+<script src="logo.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
